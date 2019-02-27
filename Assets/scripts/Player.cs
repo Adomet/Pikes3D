@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pyke : MonoBehaviour
+public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,9 +15,8 @@ public class Pyke : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerEnter(Collider other)
+    public void GameOver()
     {
-        Destroy (other.transform.root.gameObject);
+        Debug.Log("Game Over");
     }
 }
