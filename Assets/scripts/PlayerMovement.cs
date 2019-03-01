@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject MyPlayer; 
     public float speed  = 10f;
+    public float powerLevel = 1;
     public float Rotspeed = 90f;
     private Rigidbody MyRig ;
    
@@ -20,6 +21,13 @@ public class PlayerMovement : MonoBehaviour
             MyPlayer = this.gameObject;
         
     }
+
+    public void AddPower(float addition)
+    {
+        powerLevel += addition;
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -46,6 +54,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = (vAxis * Vector3.forward) * speed * Time.deltaTime;
 
-        MyRig.MovePosition(transform.position +(rot *movement));
+        MyRig.MovePosition(transform.position +(rot *movement * powerLevel));
     }
 }
