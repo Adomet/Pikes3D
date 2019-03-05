@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.root.GetComponent<Player>() != null)
