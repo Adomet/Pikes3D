@@ -25,18 +25,24 @@ public class Pike : MonoBehaviour
 
         if (other.transform.GetComponent<Pike>() == null)
         {
-            if(other.transform.root.GetComponent<Player>() != null)
+            if (other.transform.root.GetComponent<Player>() != null)
             {
                 other.transform.root.GetComponent<Player>().GameOver();
             }
-            else
+            else if (other.transform.root.GetComponent<AI>() != null)
             {
                 transform.root.GetComponent<Player>().AddPointToPlayer(1);
 
                 if (other.transform.root.GetComponent<AI>() != null)
                     other.transform.root.GetComponent<AI>().GameOver();
 
-                  Destroy(other.transform.root.gameObject);
+                Destroy(other.transform.root.gameObject);
+            }
+            else
+            {
+
+
+                Destroy(other.transform.root.gameObject);
             }
         }
         else

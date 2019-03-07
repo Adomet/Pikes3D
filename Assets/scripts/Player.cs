@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public void AddPointToPlayer(int addition)
     {
         PlayerPoint += addition;
+        Pike.AddPower(0.2f);
         Debug.Log("PlayerPoint: " + PlayerPoint);
     }
 
