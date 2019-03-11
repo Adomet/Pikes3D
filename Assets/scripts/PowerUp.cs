@@ -17,7 +17,14 @@ public class PowerUp : MonoBehaviour
             Destroy(this.gameObject);
         }
         //else if () TODO: add aı power up
-            else
-            return;
+        else if(other.transform.root.GetComponent<AI>() != null)
+        {
+            other.transform.root.GetComponent<AIMovement>().AddPower(0.5f);
+
+            Destroy(this.gameObject);
+        }
+
+        else
+        return;
     }
 }

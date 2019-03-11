@@ -21,13 +21,15 @@ public class Pike : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.name);
+          //Debug.Log(other.transform.name);
 
         if (other.transform.GetComponent<Pike>() == null)
         {
             if (other.transform.root.GetComponent<Player>() != null)
             {
                 other.transform.root.GetComponent<Player>().GameOver();
+
+                Destroy(other.transform.root.gameObject);
             }
             else if (other.transform.root.GetComponent<AI>() != null)
             {

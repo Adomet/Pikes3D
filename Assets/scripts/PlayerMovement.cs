@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public GameObject MyPlayer; 
+    private GameObject MyPlayer; 
     public float speed  = 10f;
     public float BoostBar = 10f;
     public float powerLevel = 1.0f;
@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
         {
             BoostBar = 10.0f;
         }
-
         else
             BoostBar += 2.0f;
     }
@@ -47,17 +46,17 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (Input.GetMouseButton(0) && BoostBar > 0)
+        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))
         {
             if (BoostBar > 0)
+            {
                 BoostBar -= 0.1f;
+                boost = 1.3f;
+            }
             else
                 BoostBar = 0;
 
-
-
-
-            boost = 1.3f;
+           
         }
 
         else
