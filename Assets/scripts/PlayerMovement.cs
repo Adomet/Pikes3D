@@ -12,6 +12,20 @@ public class PlayerMovement : MonoBehaviour
     public float boost = 1.0f;
     public float Rotspeed = 90f;
     private Rigidbody MyRig ;
+
+
+    //UI
+
+    //Boost Button
+
+    public bool IsBoostButtonPressed = false;
+
+
+    //Joystick
+
+    public Joystick joystick;
+    
+
    
 
     // Start is called before the first frame update
@@ -23,6 +37,20 @@ public class PlayerMovement : MonoBehaviour
             MyPlayer = this.gameObject;
         
     }
+
+
+    public void BoostButtonPressed()
+    {
+        IsBoostButtonPressed = true;
+}
+
+    public void BoostButtonReleased()
+    {
+        IsBoostButtonPressed = false;
+    }
+
+
+
 
     public void AddPower(float addition)
     {
@@ -40,13 +68,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // For PC
+        // float hAxis = Input.GetAxis("Horizontal");
+        // float vAxis = Input.GetAxis("Vertical");
 
-        float hAxis = Input.GetAxis("Horizontal");
-        float vAxis = Input.GetAxis("Vertical");
+        //For Mobile
 
+        float hAxis = joystick.Horizontal;
+        float vAxis = joystick.Vertical;
 
-
-        if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))
+        if (IsBoostButtonPressed)
         {
             if (BoostBar > 0)
             {
@@ -55,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 BoostBar = 0;
-
-           
         }
 
         else
@@ -73,8 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.rotation = rot;
 
-
-        Vector3 movement = (vAxis * Vector3.forward) * speed* boost * Time.deltaTime;
+        Vector3 movement = Vector3.forward * speed* boost * Time.deltaTime;
 
         MyRig.MovePosition(transform.position +(rot *movement * boost * powerLevel));
     }
