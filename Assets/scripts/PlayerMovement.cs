@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float Rotspeed = 90f;
     private Rigidbody MyRig ;
 
+    Quaternion targetRot;
+
 
     //UI
 
@@ -92,18 +94,15 @@ public class PlayerMovement : MonoBehaviour
             boost = 1.0f;
 
 
-        Quaternion rot = transform.rotation;
+        Vector3 dir = new Vector3(-vAxis,0,hAxis);
 
-        float y = rot.eulerAngles.y;
-
-        y -= hAxis * Rotspeed *Time.deltaTime;
-
-        rot = Quaternion.Euler(0, y, 0);
-
-        transform.rotation = rot;
+        if (dir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), Rotspeed *10* Time.deltaTime);
+        }
 
         Vector3 movement = Vector3.forward * speed* boost * Time.deltaTime;
 
-        MyRig.MovePosition(transform.position +(rot *movement * boost * powerLevel));
+        MyRig.MovePosition(transform.position +(transform.rotation *movement * boost * powerLevel));
     }
 }

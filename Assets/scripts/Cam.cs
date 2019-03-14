@@ -22,6 +22,7 @@ public class Cam : MonoBehaviour
 
     void LateUpdate()
     {
+        if(target != null)
         transform.position = target.position + Offset;
     }
 }
