@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public ObjectPooler objPooler;
+
     public GameObject AIPrefab;
     public GameObject PowerPrefab;
 
@@ -21,9 +23,10 @@ public class Spawner : MonoBehaviour
     {
        // GameObject AıPlayer = Instantiate(AIPrefab,transform.position + new Vector3 (0,1,0),Quaternion.identity);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 50000; i++)
         {
-           // GameObject PowerUP = Instantiate(PowerPrefab, transform.position + new Vector3(0, i +1 , 0), Quaternion.identity);
+            GameObject PowerUP = objPooler.SpawnFromPool("PUpCube",transform.position,Quaternion.identity);
+                
         }
      
     }
