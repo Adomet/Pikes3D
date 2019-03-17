@@ -33,7 +33,10 @@ public class Pike : MonoBehaviour
             }
             else if (other.transform.root.GetComponent<AI>() != null)
             {
-                transform.root.GetComponent<Player>().AddPointToPlayer(1);
+                if (transform.root.GetComponent<Player>() != null)
+                {
+                    transform.root.GetComponent<Player>().AddPointToPlayer(1);
+                }
 
                 if (other.transform.root.GetComponent<AI>() != null)
                     other.transform.root.GetComponent<AI>().GameOver();
@@ -42,8 +45,6 @@ public class Pike : MonoBehaviour
             }
             else
             {
-
-
                 Destroy(other.transform.root.gameObject);
             }
         }

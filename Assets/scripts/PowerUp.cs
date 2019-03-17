@@ -5,6 +5,10 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
 
+    private void Start()
+    {
+        this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+    }
 
 
 

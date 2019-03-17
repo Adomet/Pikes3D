@@ -17,10 +17,11 @@ public class ObjectPooler : MonoBehaviour
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     // @TODO Add Start of Polled object
-    void Start()
+    void Awake()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
+      
         foreach (Pool pool in pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
@@ -45,7 +46,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool :" +tag+ " doesnt exicst!");
+            Debug.LogWarning("Pool :" + tag + " doesnt exicst!");
             return null;
         }
 

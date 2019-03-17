@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+
+
+    [System.Serializable]
+    public class Spawn
+    {
+        public string tag;
+        public int spSize;
+    }
+
+    public List<Spawn> Spawns;
+
     public ObjectPooler objPooler;
 
-    public GameObject AIPrefab;
-    public GameObject PowerPrefab;
+    public float rndminX = 0f;
+    public float rndmaxX = 0f;
+    public float rndminZ = 0f;
+    public float rndmaxZ = 0f;
+
 
     //@TODO Add pooling 
     //@TODO Add pooling 
@@ -21,13 +35,15 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // GameObject AıPlayer = Instantiate(AIPrefab,transform.position + new Vector3 (0,1,0),Quaternion.identity);
 
-        for (int i = 0; i < 50000; i++)
+
+        foreach (Spawn sp in Spawns)
         {
-            GameObject PowerUP = objPooler.SpawnFromPool("PUpCube",transform.position,Quaternion.identity);
-                
+            for (int i = 0; i < sp.spSize; i++)
+            {
+                GameObject SpObj = objPooler.SpawnFromPool(sp.tag, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+                    
+            }
         }
-     
     }
 }
