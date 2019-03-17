@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Pike : MonoBehaviour
 {
+    public ObjectPooler Pooler;
     public float powerLevel = 2.0f;
+
+
+    public void Awake()
+    {
+        Pooler = GameObject.FindObjectOfType<ObjectPooler>();
+    }
 
 
     public void AddPower(float addition)
@@ -41,11 +48,11 @@ public class Pike : MonoBehaviour
                 if (other.transform.root.GetComponent<AI>() != null)
                     other.transform.root.GetComponent<AI>().GameOver();
 
-                Destroy(other.transform.root.gameObject);
+                Pooler.DestroyToPool(other.transform.root.gameObject);
             }
             else
             {
-                Destroy(other.transform.root.gameObject);
+                Pooler.DestroyToPool(other.transform.gameObject);
             }
         }
         else

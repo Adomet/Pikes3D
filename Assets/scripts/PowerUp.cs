@@ -5,6 +5,8 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
 
+    public ObjectPooler Pooler;
+
     private void Start()
     {
         this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
@@ -18,14 +20,14 @@ public class PowerUp : MonoBehaviour
         {
             other.transform.root.GetComponent<PlayerMovement>().AddPower(0.005f);
 
-            Destroy(this.gameObject);
+           // Pooler.DestroyToPool(this.gameObject);
         }
         //else if () TODO: add aı power up
         else if(other.transform.root.GetComponent<AI>() != null)
         {
             other.transform.root.GetComponent<AIMovement>().AddPower(0.5f);
 
-            Destroy(this.gameObject);
+           // Pooler.DestroyToPool(this.gameObject);
         }
 
         else

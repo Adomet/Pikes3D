@@ -17,6 +17,7 @@ public class ObjectPooler : MonoBehaviour
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     // @TODO Add Start of Polled object
+
     void Awake()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -36,28 +37,38 @@ public class ObjectPooler : MonoBehaviour
 
             }
 
-            poolDictionary.Add(pool.tag,objectPool);
+            poolDictionary.Add(pool.tag +"(Clone)",objectPool);
         }
 
 
     }
 
-    public GameObject SpawnFromPool (string tag, Vector3 positon ,Quaternion rotation)
+    public GameObject SpawnFromPool (string tag,GameObject Obj,Vector3 positon ,Quaternion rotation)
     {
+        GameObject objectToSpawn;
+
         if (!poolDictionary.ContainsKey(tag))
         {
             Debug.LogWarning("Pool :" + tag + " doesnt exicst!");
             return null;
         }
 
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        if (poolDictionary[tag].Count != 0)
+        {
 
-        objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = positon;
-        objectToSpawn.transform.rotation = rotation;
+            objectToSpawn = poolDictionary[tag].Dequeue();
 
+            objectToSpawn.SetActive(true);
+            objectToSpawn.transform.position = positon;
+            objectToSpawn.transform.rotation = rotation;
+        }
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+        else
+        {
+            Debug.Log( tag + " Instantiated");
+
+             objectToSpawn = Instantiate(Obj,positon,rotation);
+        }
 
 
         return objectToSpawn;
@@ -65,4 +76,13 @@ public class ObjectPooler : MonoBehaviour
     }
 
 
+    public void DestroyToPool (GameObject ObjToDestory)
+    {
+        Debug.Log(ObjToDestory.name + " Got Pooled");
+
+        ObjToDestory.SetActive(false);
+
+        poolDictionary[ObjToDestory.name].Enqueue(ObjToDestory);
+
+    }
 }

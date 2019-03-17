@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     public class Spawn
     {
         public string tag;
+        public GameObject Obj;
         public int spSize;
     }
 
@@ -41,7 +42,7 @@ public class Spawner : MonoBehaviour
         {
             for (int i = 0; i < sp.spSize; i++)
             {
-                GameObject SpObj = objPooler.SpawnFromPool(sp.tag, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+                GameObject SpObj = objPooler.SpawnFromPool(sp.tag,sp.Obj, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
                     
             }
         }
