@@ -25,7 +25,7 @@ public class AIMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         Quaternion rot = transform.rotation;
