@@ -65,7 +65,7 @@ public class ObjectPooler : MonoBehaviour
 
         else
         {
-            Debug.Log( tag + " Instantiated");
+          //  Debug.Log( tag + " Instantiated");
 
              objectToSpawn = Instantiate(Obj,positon,rotation);
         }
@@ -78,7 +78,7 @@ public class ObjectPooler : MonoBehaviour
 
     public void DestroyToPool (GameObject ObjToDestory)
     {
-        Debug.Log(ObjToDestory.name + " Got Pooled");
+       // Debug.Log(ObjToDestory.name + " Got Pooled");
 
         ObjToDestory.SetActive(false);
 

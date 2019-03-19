@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
 
 
     //UI
+    public Image BoostBarImage;
 
+    
     //Boost Button
 
     public bool IsBoostButtonPressed = false;
@@ -54,15 +57,27 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    public void AddPower(float addition)
+    public void AddPower(float addition,float BoostBarIncrease)
     {
+
+        
         powerLevel += addition;
+
+        BoostBar += BoostBarIncrease;
+
         if (BoostBar >= 10.0f)
         {
             BoostBar = 10.0f;
         }
-        else
-            BoostBar += 2.0f;
+            
+
+        CalBoostBarLevel();
+    }
+
+    public void CalBoostBarLevel()
+    {
+        // BoostBar fill amount = (boostbarvalue / 10 )/ 3 
+        BoostBarImage.fillAmount = BoostBar / 30f;
     }
 
 
@@ -88,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 BoostBar = 0;
+
+            CalBoostBarLevel();
         }
 
         else

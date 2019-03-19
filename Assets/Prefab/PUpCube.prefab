@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pooler: {fileID: 0}
+  BoostBarIncrease: 1
+  AIBoostIncrease: 0.5
 --- !u!54 &590678085975206247
 Rigidbody:
   m_ObjectHideFlags: 0

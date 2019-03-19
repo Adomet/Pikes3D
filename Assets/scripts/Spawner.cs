@@ -22,22 +22,12 @@ public class Spawner : MonoBehaviour
     public float rndmaxX = 0f;
     public float rndminZ = 0f;
     public float rndmaxZ = 0f;
-
-
-    //@TODO Add pooling 
-    //@TODO Add pooling 
-    //@TODO Add pooling 
-    //@TODO Add pooling 
-    //@TODO Add pooling 
-
-
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-
         foreach (Spawn sp in Spawns)
         {
             for (int i = 0; i < sp.spSize; i++)

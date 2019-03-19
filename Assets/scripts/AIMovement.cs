@@ -22,6 +22,8 @@ public class AIMovement : MonoBehaviour
     void Start()
     {
         MyRig = GetComponent<Rigidbody>();
+
+        // @TODO Add randomized Aı poperties may be a seed for each
     }
 
     // Update is called once per frame

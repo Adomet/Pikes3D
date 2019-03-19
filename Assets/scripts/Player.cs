@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public string playerName = "Player";
+
+    public GameController GC;
+
     public Pike Pike;
     public int PlayerPoint = 1;
+    public int KillCount = 0;
+    public int pUpCount = 0;
 
+    public bool IsAI = true;
 
     public GameObject PowerUpPrefab;
 
@@ -17,10 +25,14 @@ public class Player : MonoBehaviour
 
 
 
+
     public void AddPointToPlayer(int addition)
     {
         PlayerPoint += addition;
         Pike.AddPower(0.2f);
+
+        KillCount++;
+
         Debug.Log("PlayerPoint: " + PlayerPoint);
     }
 
@@ -28,6 +40,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GC = GameObject.FindObjectOfType<GameController>();
+
+
+        if(IsAI)
+        playerName += Random.Range(0, 21);
+
 
         //TODO search for pike 
         if (Pike == null)
@@ -64,7 +82,11 @@ public class Player : MonoBehaviour
         SpCube3.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
 
+        if (IsAI)
+            Debug.Log("AI Game Over");
+        else
+            GC.PlayerGameOver();
 
-        Debug.Log("Game Over");
+
     }
 }

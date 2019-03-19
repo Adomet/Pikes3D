@@ -14,9 +14,9 @@ public class AI : MonoBehaviour
    public void GameOver ()
     {
 
-        Quaternion rot = transform.rotation;
-        float y = rot.eulerAngles.y;
-        rot = Quaternion.Euler(0, y, 0);
+       // Quaternion rot = transform.rotation;
+       // float y = rot.eulerAngles.y;
+       // rot = Quaternion.Euler(0, y, 0);
 
 
         GameObject SpCube1 = Instantiate(PowerUpPrefab, (transform.position + SpPos), Random.rotation);
