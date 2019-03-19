@@ -18,4 +18,16 @@ public class GameController : MonoBehaviour
 
         IsGameOver = true;
     }
+
+
+    public void RestartGame ()
+    {
+        Application.LoadLevel(0);
+    }
+
+    public void ExitGame ()
+    {
+
+        Application.Quit();
+    }
 }
