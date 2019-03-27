@@ -11,8 +11,10 @@ public class PowerUp : MonoBehaviour
 
     public float AIBoostIncrease = 0.5f;
 
-    private void Start()
+    private void OnEnable()
     {
+        Pooler = GameObject.FindObjectOfType<ObjectPooler>();
+
         this.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
     }
 
@@ -29,15 +31,21 @@ public class PowerUp : MonoBehaviour
             {
                 other.transform.root.GetComponent<PlayerMovement>().AddPower(0.005f, BoostBarIncrease);
 
-                // Pooler.DestroyToPool(this.gameObject);
+               
             }
             //else if () TODO: add aı power up
             else
             {
                 other.transform.root.GetComponent<AIMovement>().AddPower(AIBoostIncrease);
 
-                // Pooler.DestroyToPool(this.gameObject);
+                
             }
+            Pooler = GameObject.FindObjectOfType<ObjectPooler>();
+            Pooler.DestroyToPool(this.gameObject);
+
         }
+
+
+
     }
 }

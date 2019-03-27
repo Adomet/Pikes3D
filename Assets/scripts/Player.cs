@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public GameController GC;
 
     public Pike Pike;
+    public GameObject Body;
+    public TrailRenderer TR;
+
     public int PlayerPoint = 1;
     public int KillCount = 0;
     public int pUpCount = 0;
@@ -50,7 +53,33 @@ public class Player : MonoBehaviour
         //TODO search for pike 
         if (Pike == null)
             Destroy(gameObject);
+
+
+       
     }
+
+    private void OnEnable()
+    {
+        //Change indivicual color
+
+        Renderer [] rds = Pike.GetComponentsInChildren<Renderer>();
+     
+        Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f); ;
+     
+        foreach (Renderer rd in rds )
+        {
+            rd.material.color = color;
+        }
+
+        Body.GetComponent<Renderer>().material.color = color;
+
+        TR.startColor = color;
+
+        color.a = 0;
+        TR.endColor = color;
+
+    }
+
 
     // Update is called once per frame
     void Update()

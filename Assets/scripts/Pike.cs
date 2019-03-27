@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pike : MonoBehaviour
 {
     public ObjectPooler Pooler;
-    public float powerLevel = 2.0f;
+    private float powerLevel = 1.0f;
 
 
     public void Awake()
