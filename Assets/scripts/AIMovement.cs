@@ -19,15 +19,15 @@ public class AIMovement : MonoBehaviour
    
     public AIType       Type        = AIType.Passive;
     public AIState      State       = AIState.Roam;
-    public Player[] PlayersNear;
-    public List<PowerUp> PUpsNear   = new List<PowerUp>();
-    public float AILookDistance = 1f;
-
+    public float BoostBar = 10f;
+    public float boost = 1.0f;
+    public Tracker Tracker;
     public Transform target;
     public float range = 10000f;
+    public bool IsBoostButtonPressed = false;
 
     //------------------------------------
-    
+
 
 
 
@@ -41,8 +41,16 @@ public class AIMovement : MonoBehaviour
     private Rigidbody MyRig;
 
 
-    public void AddPower(float addition)
+    public void AddPower(float addition,float BoostBarIncrease)
     {
+
+        BoostBar += BoostBarIncrease;
+
+        if (BoostBar >= 10.0f)
+        {
+            BoostBar = 10.0f;
+        }
+
         rotSpeed += addition;
         AISpeed += addition;
     }
@@ -51,11 +59,12 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayersNear = GameObject.FindObjectsOfType<Player>();
 
+
+        Tracker = GameObject.FindObjectOfType<Tracker>();
         MyRig = GetComponent<Rigidbody>();
 
-        InvokeRepeating("FindTarget", 0.5f, 0.5f);
+        InvokeRepeating("FindTarget", Random.Range(0.1f,1f), Random.Range(0.1f, 0.5f));
 
         tmprot = rotSpeed;
 
@@ -64,35 +73,52 @@ public class AIMovement : MonoBehaviour
 
     public void AIAttack()
     {
-        // if got any ---> go target and poke his face
+        // if got any target ---> go target and poke his face
         if (target == null)
         {
+            IsBoostButtonPressed = false;
             State = AIState.Roam;
             return;
         }
-           
-       
 
 
+        Vector3 dir = target.position - transform.position;
+        Quaternion lookrotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(dir),rotSpeed);
+
+        transform.rotation = lookrotation;
+
+        Vector3 movement = (AISpeed * Vector3.forward) *boost * Time.deltaTime;
+
+        MyRig.MovePosition(transform.position + (transform.rotation * movement));
 
 
+        //Use Boost
+        IsBoostButtonPressed = true;
     }
+
+
+
     public void FindTarget()
     {
-      
+        if (!this.enabled)
+            return;
+
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        foreach (Player enemy in PlayersNear)
+        foreach (Player enemy in Tracker.Players)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (distanceToEnemy > 0f)
+            if (enemy != null)
             {
-                if (distanceToEnemy < shortestDistance)
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy > 0f)
                 {
-                    shortestDistance = distanceToEnemy;
-                    nearestEnemy = enemy.gameObject;
+                    if (distanceToEnemy < shortestDistance)
+                    {
+                        shortestDistance = distanceToEnemy;
+                        nearestEnemy = enemy.gameObject;
+                    }
                 }
             }
         }
@@ -113,32 +139,30 @@ public class AIMovement : MonoBehaviour
         // find a Mengageable target to poke
         // rotate random -> find nearest enemy analyze
 
-        rotSpeed = rotSpeed - 0.005f;
+        rotSpeed = rotSpeed - 0.01f;
         if (rotSpeed <= 0f)
         {
             rotSpeed = tmprot;
         }
 
-         Quaternion rot = transform.rotation;
+       
         
-         float y = rot.eulerAngles.y;
+         Vector3 movement = (AISpeed * Vector3.forward) * boost * Time.deltaTime;
         
-         y -= rotSpeed * Time.deltaTime;
-        
-         rot = Quaternion.Euler(0, y, 0);
-        
-        
-        
-         Vector3 movement = (AISpeed * Vector3.forward)  * Time.deltaTime;
-        
-         MyRig.MovePosition(transform.position + (rot * movement));
+         MyRig.MovePosition(transform.position + (transform.rotation * movement));
         
          transform.Rotate(transform.up,rotSpeed);
 
         if (target != null)
         {
+            rotSpeed = tmprot;
             State = AIState.Attack;
         }
+
+       // else if (BoostBar < 3.0f)
+       // {
+       //     State = AIState.Getresource;
+       // }
 
     }
     public void AIGetresource()
@@ -169,6 +193,10 @@ public class AIMovement : MonoBehaviour
 
     }
 
+
+
+ 
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -177,6 +205,25 @@ public class AIMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (IsBoostButtonPressed)
+        {
+            if (BoostBar > 0)
+            {
+                BoostBar -= 0.1f;
+                boost = 1.3f;
+            }
+            else
+            {
+                BoostBar = 0;
+                boost = 1f;
+            }
+
+        }
+
+        else
+            boost = 1.0f;
+
 
         AIMove();
 

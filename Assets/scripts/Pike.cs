@@ -28,16 +28,22 @@ public class Pike : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-          //Debug.Log(other.transform.name);
+          // Optimize new
 
-        if (other.transform.GetComponent<Pike>() == null)
+
+
+
+
+          //Debug.Log(other.transform.name);
+         
+        if (other.tag != "Pike")
         {
             Player pl = other.transform.root.GetComponent<Player>();
-
+      
             if (pl != null)
             {
                 pl.GameOver();
-
+      
                 if (pl.IsAI)
                 {
                     Pooler.DestroyToPool(other.transform.root.gameObject);
@@ -53,23 +59,6 @@ public class Pike : MonoBehaviour
                 Pooler.DestroyToPool(other.transform.gameObject);
             }
         }
-        else
-            return;
-
-
-
-        //if (other.GetComponent<Pike>() == null && other.transform.root.GetComponent<Player>() == null)
-        ////Todo:Check if its a enemy
-        //{
-        //    Destroy(other.transform.root.gameObject);
-        //}
-        //
-        //else if (other.transform.root.GetComponent<Player>() != null)
-        //{
-        //    GameObject player = other.transform.root.gameObject;
-        //    player.GetComponent<Player>().GameOver();
-        //}
-        //else
-        //    return;
+     
     }
 }

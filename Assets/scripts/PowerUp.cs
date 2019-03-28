@@ -36,7 +36,7 @@ public class PowerUp : MonoBehaviour
             //else if () TODO: add aı power up
             else
             {
-                other.transform.root.GetComponent<AIMovement>().AddPower(AIBoostIncrease);
+                other.transform.root.GetComponent<AIMovement>().AddPower(AIBoostIncrease, BoostBarIncrease);
 
                 
             }

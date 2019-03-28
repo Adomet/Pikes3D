@@ -48,6 +48,7 @@ public class ScoreBoardController : MonoBehaviour
         PlayerList = new List<Player>();
         foreach (Player player in Playerarr)
         {
+            if(player.enabled)
             PlayerList.Add(player);
         }
 
@@ -68,9 +69,11 @@ public class ScoreBoardController : MonoBehaviour
 
         //update my player text
 
-        LeaderPlayernames[5].SetText(((PlayerList.IndexOf(player)+1).ToString()) + ". " + player.playerName);
-        LeaderPlayerScores[5].SetText(((player.KillCount * 100) + (player.pUpCount * 10)).ToString());
-
+        if(player !=null)
+        {
+            LeaderPlayernames[5].SetText(((PlayerList.IndexOf(player) + 1).ToString()) + ". " + player.playerName);
+            LeaderPlayerScores[5].SetText(((player.KillCount * 100) + (player.pUpCount * 10)).ToString());
+        }
 
     }
 

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987837806780982059}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1, y: 0, z: -0.501}
+  m_LocalPosition: {x: 0.75, y: 0, z: -0.501}
   m_LocalScale: {x: 0.3, y: 1, z: 0.30000025}
   m_Children:
   - {fileID: 1987837807144403227}
@@ -97,13 +97,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   State: 1
-  PlayersNear: []
-  PUpsNear: []
   AILookDistance: 1
+  Tracker: {fileID: 0}
   target: {fileID: 0}
   range: 10
   rotSpeed: 4
-  AISpeed: 20
+  AISpeed: 10
 --- !u!114 &7600313701773502271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +143,7 @@ GameObject:
   - component: {fileID: 1987837807144403231}
   m_Layer: 0
   m_Name: PikeMesh
-  m_TagString: Untagged
+  m_TagString: Pike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
