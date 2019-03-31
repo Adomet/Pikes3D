@@ -23,8 +23,12 @@ public class AIMovement : MonoBehaviour
     public float boost = 1.0f;
     public Tracker Tracker;
     public Transform target;
+    private float targetdistance = 0.0f;
     public float range = 10000f;
     public bool IsBoostButtonPressed = false;
+
+    private float AIRotInput = 0.0f;
+    public float AIRotInputValue = 1.0f;
 
     //------------------------------------
 
@@ -34,9 +38,9 @@ public class AIMovement : MonoBehaviour
 
 
 
-    public float rotSpeed = 5.0f;
+    public float rotSpeed = 4.0f;
     private float tmprot;
-    public float AISpeed = 5.0f;
+    public float AISpeed = 4.0f;
 
     private Rigidbody MyRig;
 
@@ -51,8 +55,10 @@ public class AIMovement : MonoBehaviour
             BoostBar = 10.0f;
         }
 
-        rotSpeed += addition;
-        AISpeed += addition;
+        tmprot += (addition / 100.0f);
+        // AISpeed += addition;
+        AIRotInputValue += (addition/50.0f);
+        range += (addition/10.0f);
     }
 
 
@@ -65,6 +71,14 @@ public class AIMovement : MonoBehaviour
         MyRig = GetComponent<Rigidbody>();
 
         InvokeRepeating("FindTarget", Random.Range(0.1f,1f), Random.Range(0.1f, 0.5f));
+
+
+        // Randomness
+        rotSpeed += Random.Range(0.01f, 1.0f);
+        AISpeed += Random.Range(0.01f, 1.0f);
+        AIRotInputValue += Random.Range(0.01f, 0.5f);
+        range += Random.Range(0.1f, range/4);
+
 
         tmprot = rotSpeed;
 
@@ -82,8 +96,12 @@ public class AIMovement : MonoBehaviour
         }
 
 
-        Vector3 dir = target.position - transform.position;
-        Quaternion lookrotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(dir),rotSpeed);
+        Vector3 dir = target.position - (transform.position + (transform.right * 0.75f));
+
+        // Calculate Rot
+        AIRotInput = AIRotInputValue;//* (1.0f - (targetdistance / range)) ;
+
+        Quaternion lookrotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(dir),rotSpeed * AIRotInput);
 
         transform.rotation = lookrotation;
 
@@ -93,17 +111,21 @@ public class AIMovement : MonoBehaviour
 
 
         //Use Boost
+
+        float BoostDistance = 0.3f;
+
+        if ( BoostDistance <(targetdistance / range))
         IsBoostButtonPressed = true;
     }
 
 
-
+    
     public void FindTarget()
     {
         if (!this.enabled)
             return;
 
-        float shortestDistance = Mathf.Infinity;
+             float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
         foreach (Player enemy in Tracker.Players)
@@ -126,6 +148,7 @@ public class AIMovement : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetdistance = shortestDistance;
         }
 
         else
@@ -139,7 +162,7 @@ public class AIMovement : MonoBehaviour
         // find a Mengageable target to poke
         // rotate random -> find nearest enemy analyze
 
-        rotSpeed = rotSpeed - 0.01f;
+        rotSpeed -= tmprot * (Random.Range(0.001f,0.005f));
         if (rotSpeed <= 0f)
         {
             rotSpeed = tmprot;

@@ -97,12 +97,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   State: 1
-  AILookDistance: 1
+  BoostBar: 10
+  boost: 1
   Tracker: {fileID: 0}
   target: {fileID: 0}
   range: 10
-  rotSpeed: 4
-  AISpeed: 10
+  IsBoostButtonPressed: 0
+  AIRotInputValue: 1
+  rotSpeed: 3
+  AISpeed: 6
 --- !u!114 &7600313701773502271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +131,8 @@ MonoBehaviour:
     type: 3}
   SpPos: {x: 0, y: 1, z: 0}
   SpSpeed: 5
+  AIMove: {fileID: 0}
+  PlayerMove: {fileID: 0}
 --- !u!1 &1987837807144403220
 GameObject:
   m_ObjectHideFlags: 0

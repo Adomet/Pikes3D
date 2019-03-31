@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     public float SpSpeed = 1f;
 
+    public AIMovement AIMove;
+    public PlayerMovement PlayerMove;
 
 
 
@@ -34,20 +36,35 @@ public class Player : MonoBehaviour
         PlayerPoint += addition;
         Pike.AddPower(0.2f);
 
+        if(IsAI)
+        {
+            AIMove.AddPower(addition,0.1f);
+
+        }
+
+        else
+        {
+            PlayerMove.AddPower(addition, 0.1f);
+
+        }
+
+
+
         KillCount++;
 
         Debug.Log("PlayerPoint: " + PlayerPoint);
+
+
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        GC = GameObject.FindObjectOfType<GameController>();
+     
 
 
-        if(IsAI)
-        playerName += Random.Range(0, 21);
+        
 
 
         //TODO search for pike 
@@ -60,9 +77,26 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+
+        GC = GameObject.FindObjectOfType<GameController>();
+
+        if (IsAI)
+        {
+            AIMove = GetComponent<AIMovement>();
+            playerName += Random.Range(0, 21);
+        }
+        else
+        {
+            PlayerMove = GetComponent<PlayerMovement>();
+        }
+
+
+
+
+
         //Change indivicual color
 
-        Renderer [] rds = Pike.GetComponentsInChildren<Renderer>();
+        Renderer[] rds = Pike.GetComponentsInChildren<Renderer>();
      
         Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f); ;
      

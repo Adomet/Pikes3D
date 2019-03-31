@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         
-        powerLevel += addition;
+        powerLevel += (addition/100.0f);
 
         BoostBar += BoostBarIncrease;
 
