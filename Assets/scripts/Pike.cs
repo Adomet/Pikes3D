@@ -6,11 +6,15 @@ public class Pike : MonoBehaviour
 {
     public ObjectPooler Pooler;
     private float powerLevel = 1.0f;
+    public Player MyPlayer; 
 
 
     public void Awake()
     {
         Pooler = GameObject.FindObjectOfType<ObjectPooler>();
+
+        MyPlayer = transform.root.GetComponent<Player>();
+
     }
 
 
@@ -28,14 +32,7 @@ public class Pike : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-          // Optimize new
-
-
-
-
-
-          //Debug.Log(other.transform.name);
-         
+        
         if (other.tag != "Pike")
         {
             Player pl = other.transform.root.GetComponent<Player>();
@@ -46,12 +43,12 @@ public class Pike : MonoBehaviour
       
                 if (pl.IsAI)
                 {
-                    Pooler.DestroyToPool(other.transform.root.gameObject);
-                    transform.root.GetComponent<Player>().AddPointToPlayer(1);
+                    Pooler.DestroyToPool(pl.gameObject);
+                    MyPlayer.AddPointToPlayer(1);
                 }
                 else
                 {
-                    Destroy(other.transform.root.gameObject);
+                    pl.gameObject.SetActive(false);
                 }
             }
             else

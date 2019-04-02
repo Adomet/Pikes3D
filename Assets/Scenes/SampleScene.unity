@@ -197,7 +197,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.05
+  m_fontSize: 21.35
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.8
+  m_fontSize: 20.4
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 27.55
+  m_fontSize: 21.4
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34
+  m_fontSize: 27.55
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.05
+  m_fontSize: 21.35
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1641,7 +1641,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34
+  m_fontSize: 27.65
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.9
+  m_fontSize: 27.8
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1961,7 +1961,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.05
+  m_fontSize: 21.35
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.05
+  m_fontSize: 21.35
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2281,7 +2281,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.05
+  m_fontSize: 27.65
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2847,7 +2847,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 28.25
+  m_fontSize: 21.9
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3028,6 +3028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pooler: {fileID: 1558383822}
+  MyPlayer: {fileID: 0}
 --- !u!1 &601513438
 GameObject:
   m_ObjectHideFlags: 0
@@ -3113,7 +3114,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.85
+  m_fontSize: 27.65
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4214,7 +4215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111842352}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 4.6, y: 0.865, z: 1000}
+  m_LocalPosition: {x: 5, y: 0.865, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1659887791}
@@ -4239,7 +4240,7 @@ MonoBehaviour:
   BoostBar: 10
   powerLevel: 1
   boost: 1
-  Rotspeed: 36
+  Rotspeed: 42
   BoostBarImage: {fileID: 1497586127}
   IsBoostButtonPressed: 0
   joystick: {fileID: 1730261183}
@@ -4449,7 +4450,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.05
+  m_fontSize: 21.35
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4797,7 +4798,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.95
+  m_fontSize: 27.55
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5062,7 +5063,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.4
+  m_fontSize: 20.5
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5169,10 +5170,10 @@ MonoBehaviour:
   Spawns:
   - tag: PUpCube(Clone)
     Obj: {fileID: 590678085975206241, guid: 2db7a2de4f8824740be6bc2324a43c37, type: 3}
-    spSize: 400
+    spSize: 150
   - tag: AI(Clone)
     Obj: {fileID: 1987837807053170335, guid: be93e76a888ca2b4a9b4044139598773, type: 3}
-    spSize: 350
+    spSize: 50
   objPooler: {fileID: 1558383822}
   rndminX: -100
   rndmaxX: 100
@@ -5298,11 +5299,11 @@ MonoBehaviour:
   pools:
   - tag: PUpCube
     prefab: {fileID: 590678085975206241, guid: 2db7a2de4f8824740be6bc2324a43c37, type: 3}
-    size: 400
+    size: 200
   - tag: AI
     prefab: {fileID: 1987837807053170335, guid: be93e76a888ca2b4a9b4044139598773,
       type: 3}
-    size: 400
+    size: 75
 --- !u!4 &1558383823
 Transform:
   m_ObjectHideFlags: 0
@@ -5544,7 +5545,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.05
+  m_fontSize: 21.35
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5704,7 +5705,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 26.4
+  m_fontSize: 20.5
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6097,7 +6098,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 25.55
+  m_fontSize: 20.55
   m_fontSizeBase: 19.8
   m_fontWeight: 400
   m_enableAutoSizing: 1

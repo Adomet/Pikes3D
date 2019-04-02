@@ -99,7 +99,7 @@ public class AIMovement : MonoBehaviour
         Vector3 dir = target.position - (transform.position + (transform.right * 0.75f));
 
         // Calculate Rot
-        AIRotInput = AIRotInputValue;//* (1.0f - (targetdistance / range)) ;
+        AIRotInput = AIRotInputValue * (1.0f - (targetdistance / range)) ;
 
         Quaternion lookrotation = Quaternion.RotateTowards(transform.rotation,Quaternion.LookRotation(dir),rotSpeed * AIRotInput);
 

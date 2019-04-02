@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         if(IsAI)
         {
             AIMove.AddPower(addition,0.1f);
-
         }
 
         else
@@ -61,10 +60,18 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
+
+        if (IsAI)
+        {
+            AIMove = GetComponent<AIMovement>();
+            playerName += Random.Range(0, 21);
+        }
+        else
+        {
+            PlayerMove = GetComponent<PlayerMovement>();
+        }
 
 
-        
 
 
         //TODO search for pike 
@@ -79,19 +86,6 @@ public class Player : MonoBehaviour
     {
 
         GC = GameObject.FindObjectOfType<GameController>();
-
-        if (IsAI)
-        {
-            AIMove = GetComponent<AIMovement>();
-            playerName += Random.Range(0, 21);
-        }
-        else
-        {
-            PlayerMove = GetComponent<PlayerMovement>();
-        }
-
-
-
 
 
         //Change indivicual color

@@ -91,7 +91,7 @@ public class ScoreBoardController : MonoBehaviour
         UpdateLeaderBoard();
 
         //Make a score calculation system
-        P_ScoreInt.SetText((player.KillCount*100 + player.pUpCount*10 + seconds).ToString());
+        P_ScoreInt.SetText((player.KillCount*100 + player.pUpCount*10).ToString());
         P_KillsInt.SetText(player.KillCount.ToString());
         P_SurvivalInt.SetText(seconds +"s");
     }
