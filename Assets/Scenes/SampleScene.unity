@@ -5179,6 +5179,7 @@ MonoBehaviour:
   rndmaxX: 100
   rndminZ: -100
   rndmaxZ: 100
+  tracker: {fileID: 105241602}
 --- !u!4 &1478902997
 Transform:
   m_ObjectHideFlags: 0

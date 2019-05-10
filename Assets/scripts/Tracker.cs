@@ -8,7 +8,7 @@ public class Tracker : MonoBehaviour
     public Player[] Players;
     public PowerUp[] PUps;
 
-    // Start is called before the first frame update
+    // @TODO Make a system that automaticly tracks objects from the pool
     void Start()
     {
         Players = GameObject.FindObjectsOfType<Player>();

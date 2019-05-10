@@ -22,6 +22,8 @@ public class Spawner : MonoBehaviour
     public float rndmaxX = 0f;
     public float rndminZ = 0f;
     public float rndmaxZ = 0f;
+
+    public Tracker tracker;
     
 
 
@@ -36,5 +38,40 @@ public class Spawner : MonoBehaviour
                     
             }
         }
+
+        InvokeRepeating("AutoSpawn",1f,1f);
+
     }
+
+
+    // the function that spawns pooled objects back to intended number of objects
+    // @TODO Make a system that automaticly makes the spawn
+    void AutoSpawn ()
+    {
+        foreach (Spawn sp in Spawns)
+        {
+            if (sp.tag == "AI(Clone)")
+            {
+                int a = tracker.Players.Length;
+                for (int i = a; i < sp.spSize; i++)
+                {
+                       GameObject SpObj = objPooler.SpawnFromPool(sp.tag, sp.Obj, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+
+                }
+            }
+
+
+            if (sp.tag == "PUpCube(Clone)")
+            {
+                int a = tracker.PUps.Length;
+                for (int i = a; i < sp.spSize; i++)
+                {
+                    GameObject SpObj = objPooler.SpawnFromPool(sp.tag, sp.Obj, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+
+                }
+            }
+        }
+
+    }
+
 }
