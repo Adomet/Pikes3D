@@ -26,15 +26,12 @@ public class AIMovement : MonoBehaviour
     private float targetdistance = 0.0f;
     public float range = 10000f;
     public bool IsBoostButtonPressed = false;
+    public float powerLevel = 1.0f;
 
     private float AIRotInput = 0.0f;
     public float AIRotInputValue = 1.0f;
 
     //------------------------------------
-
-
-
-
 
 
 
@@ -59,6 +56,10 @@ public class AIMovement : MonoBehaviour
         // AISpeed += addition;
         AIRotInputValue += (addition/50.0f);
         range += (addition/10.0f);
+
+        powerLevel += (addition / 10.0f);
+
+        //transform.localScale = new Vector3(powerLevel, powerLevel, powerLevel);
     }
 
 
@@ -67,7 +68,7 @@ public class AIMovement : MonoBehaviour
     {
 
 
-        Tracker = GameObject.FindObjectOfType<Tracker>();
+        Tracker = FindObjectOfType<Tracker>();
         MyRig = GetComponent<Rigidbody>();
 
         InvokeRepeating("FindTarget", Random.Range(0.1f,1f), Random.Range(0.1f, 0.5f));
@@ -198,20 +199,49 @@ public class AIMovement : MonoBehaviour
     //@TODO Make a Default strategy system based on AIType
     public void AIMove()
     {
-        switch (State)
+
+        switch (Type)
         {
-            case AIState.Attack:
-                AIAttack();
+
+            case AIType.Aggrasive:
+                {
+                    switch (State)
+                    {
+                        case AIState.Attack:
+                            AIAttack();
+                            break;
+                        case AIState.Roam:
+                            AIRoam();
+                            break;
+                        case AIState.Getresource:
+                            AIGetresource();
+                            break;
+                        default:
+                            AIGetresource();
+                            break;
+                    }
+                }
                 break;
-            case AIState.Roam:
-                AIRoam();
+            case AIType.Passive:
+                {
+                    switch (State)
+                    {
+                        case AIState.Attack:
+                            AIAttack();
+                            break;
+                        case AIState.Roam:
+                            AIRoam();
+                            break;
+                        case AIState.Getresource:
+                            AIGetresource();
+                            break;
+                        default:
+                            AIGetresource();
+                            break;
+                    }
+                }
                 break;
-            case AIState.Getresource:
-                AIGetresource();
-                break;
-            default:
-                AIGetresource();
-                break;
+
         }
 
     }

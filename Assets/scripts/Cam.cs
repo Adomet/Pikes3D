@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cam : MonoBehaviour
 {
     public Transform target;
+    public Camera Camera;
 
     public float smoothSpeed = 0.125f;
 
@@ -12,8 +13,11 @@ public class Cam : MonoBehaviour
 
     private void Start()
     {
+        Camera = this.GetComponent<Camera>();
         Offset = CalOffset();
     }
+
+  
 
     Vector3 CalOffset ()
     {

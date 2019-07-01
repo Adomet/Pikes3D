@@ -60,8 +60,11 @@ public class PlayerMovement : MonoBehaviour
     public void AddPower(float addition,float BoostBarIncrease)
     {
 
-        
         powerLevel += (addition/100.0f);
+
+       // transform.localScale = new Vector3(powerLevel, powerLevel, powerLevel);
+
+        
 
         BoostBar += BoostBarIncrease;
 
@@ -86,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // For PC
+
         // float hAxis = Input.GetAxis("Horizontal");
         // float vAxis = Input.GetAxis("Vertical");
 

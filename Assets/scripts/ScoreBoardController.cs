@@ -81,8 +81,8 @@ public class ScoreBoardController : MonoBehaviour
     public void CountSeconds ()
     {
         //Do noting if GameOver
-        if (GC.IsGameOver)
-            return;
+        //if (GC.IsGameOver)
+        //    return;
 
 
         seconds++;

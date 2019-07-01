@@ -18,9 +18,7 @@ public class Spawner : MonoBehaviour
 
     public ObjectPooler objPooler;
 
-    public float rndminX = 0f;
     public float rndmaxX = 0f;
-    public float rndminZ = 0f;
     public float rndmaxZ = 0f;
 
     public Tracker tracker;
@@ -34,7 +32,7 @@ public class Spawner : MonoBehaviour
         {
             for (int i = 0; i < sp.spSize; i++)
             {
-                GameObject SpObj = objPooler.SpawnFromPool(sp.tag,sp.Obj, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+                GameObject SpObj = objPooler.SpawnFromPool(sp.tag,sp.Obj, new Vector3(Random.Range(-rndmaxX, rndmaxX), transform.position.y, Random.Range(-rndmaxZ, rndmaxZ)), Quaternion.identity);
                     
             }
         }
@@ -55,7 +53,22 @@ public class Spawner : MonoBehaviour
                 int a = tracker.Players.Length;
                 for (int i = a; i < sp.spSize; i++)
                 {
-                       GameObject SpObj = objPooler.SpawnFromPool(sp.tag, sp.Obj, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+                       GameObject SpObj = objPooler.SpawnFromPool(sp.tag, sp.Obj, new Vector3(Random.Range(-rndmaxX, rndmaxX), transform.position.y, Random.Range(-rndmaxZ, rndmaxZ)), Quaternion.identity);
+                       Player player = SpObj.GetComponent<Player>();
+                       AIMovement aIMovement = SpObj.GetComponent<AIMovement>();
+
+                    player.PlayerPoint = 1;
+                    player.KillCount = 0;
+                    player.pUpCount = 0;
+
+
+                    aIMovement.range = 10;
+                    aIMovement.powerLevel = 1;
+                    aIMovement.AIRotInputValue = 3;
+                    aIMovement.AISpeed = 6;
+
+                    player.Pike.powerLevel = 1;
+                    player.Pike.ScalePike(1);
 
                 }
             }
@@ -66,7 +79,7 @@ public class Spawner : MonoBehaviour
                 int a = tracker.PUps.Length;
                 for (int i = a; i < sp.spSize; i++)
                 {
-                    GameObject SpObj = objPooler.SpawnFromPool(sp.tag, sp.Obj, new Vector3(Random.Range(rndminX, rndmaxX), transform.position.y, Random.Range(rndminZ, rndmaxZ)), Quaternion.identity);
+                    GameObject SpObj = objPooler.SpawnFromPool(sp.tag, sp.Obj, new Vector3(Random.Range(-rndmaxX, rndmaxX), transform.position.y, Random.Range(-rndmaxZ, rndmaxZ)), Quaternion.identity);
 
                 }
             }

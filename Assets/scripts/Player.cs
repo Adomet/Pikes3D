@@ -29,29 +29,36 @@ public class Player : MonoBehaviour
     public PlayerMovement PlayerMove;
 
 
+    public ObjectPooler ObjectPooler;
+
 
 
     public void AddPointToPlayer(int addition)
     {
         PlayerPoint += addition;
-        Pike.AddPower(0.2f);
+        Pike.AddPower(0.1f);
+
+        
 
         if(IsAI)
         {
-            AIMove.AddPower(addition,0.1f);
+            if(AIMove != null)
+            AIMove.AddPower(addition*0.5f,0.1f);
         }
 
         else
         {
-            PlayerMove.AddPower(addition, 0.1f);
+            PlayerMove.AddPower(addition*0.5f, 0.1f);
 
         }
 
-
+       
 
         KillCount++;
 
-        Debug.Log("PlayerPoint: " + PlayerPoint);
+
+
+        //Debug.Log("PlayerPoint: " + PlayerPoint);
 
 
     }
@@ -60,6 +67,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
 
         if (IsAI)
         {
@@ -70,16 +78,8 @@ public class Player : MonoBehaviour
         {
             PlayerMove = GetComponent<PlayerMovement>();
         }
-
-
-
-
-        //TODO search for pike 
-        if (Pike == null)
-            Destroy(gameObject);
-
-
        
+
     }
 
     private void OnEnable()
@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
 
         GC = GameObject.FindObjectOfType<GameController>();
 
+        ObjectPooler = FindObjectOfType<ObjectPooler>();
 
         //Change indivicual color
 
@@ -119,16 +120,16 @@ public class Player : MonoBehaviour
 
 
 
-        GameObject SpCube1 = Instantiate(PowerUpPrefab, (transform.position + SpPos), Random.rotation);
+        GameObject SpCube1 = ObjectPooler.SpawnFromPool("PUpCube(Clone)", PowerUpPrefab, (transform.position + SpPos), Random.rotation);
         Vector3 force = -1 * transform.forward * SpSpeed * 1.5f * Random.Range(0.5f, 1.2f);
         SpCube1.GetComponent<Rigidbody>().velocity = force;
 
 
-        GameObject SpCube3 = Instantiate(PowerUpPrefab, (transform.position + SpPos), Random.rotation);
+        GameObject SpCube3 = ObjectPooler.SpawnFromPool("PUpCube(Clone)", PowerUpPrefab, (transform.position + SpPos), Random.rotation);
         Vector3 force3 = -1 * (transform.forward + transform.right) * SpSpeed * Random.Range(0.5f, 1.2f);
         SpCube3.GetComponent<Rigidbody>().velocity = force3;
 
-        GameObject SpCube2 = Instantiate(PowerUpPrefab, (transform.position + SpPos), Random.rotation);
+        GameObject SpCube2 = ObjectPooler.SpawnFromPool("PUpCube(Clone)", PowerUpPrefab, (transform.position + SpPos), Random.rotation);
         Vector3 force2 = -1 * (transform.forward - transform.right) * SpSpeed * Random.Range(0.5f, 1.2f);
         SpCube2.GetComponent<Rigidbody>().velocity = force2;
 
@@ -140,10 +141,14 @@ public class Player : MonoBehaviour
 
 
         if (IsAI)
-            Debug.Log("AI Game Over");
+        {
+              //  Debug.Log("AI Game Over");
+        }
+       
         else
+        {
             GC.PlayerGameOver();
-
+        }
 
     }
 }

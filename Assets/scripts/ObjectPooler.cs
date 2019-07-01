@@ -58,9 +58,11 @@ public class ObjectPooler : MonoBehaviour
 
             objectToSpawn = poolDictionary[tag].Dequeue();
 
-            objectToSpawn.SetActive(true);
             objectToSpawn.transform.position = positon;
             objectToSpawn.transform.rotation = rotation;
+
+            objectToSpawn.SetActive(true);
+
         }
 
         else
@@ -80,7 +82,11 @@ public class ObjectPooler : MonoBehaviour
     {
        // Debug.Log(ObjToDestory.name + " Got Pooled");
 
-        ObjToDestory.SetActive(false);
+          ObjToDestory.SetActive(false);
+        // Animator objAnimator = ObjToDestory.GetComponent<Animator>();
+        // if (objAnimator != null)
+        //     objAnimator.Play("Run", -1, 0f);
+ 
 
         poolDictionary[ObjToDestory.name].Enqueue(ObjToDestory);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pike : MonoBehaviour
 {
     public ObjectPooler Pooler;
-    private float powerLevel = 1.0f;
+    public float powerLevel = 1.0f;
     public Player MyPlayer; 
 
 
@@ -26,7 +26,7 @@ public class Pike : MonoBehaviour
 
     public void ScalePike(float powerLevel)
     {
-        Debug.Log("powerLevel:" + powerLevel);
+        //Debug.Log("powerLevel:" + powerLevel);
         transform.parent.localScale = new Vector3(0.3f, powerLevel, 0.3f);
     }
 
